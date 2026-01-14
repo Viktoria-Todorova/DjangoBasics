@@ -5,14 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c7e59cc2-69c1-4d34-bdae-ba32999a307d" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/destinations/urls.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/reviews/urls.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/destination/detail.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/destination/list.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/review/detail.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/review/list.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UrlsAndViews/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/UrlsAndViews/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UrlsAndViews/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/UrlsAndViews/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/reviews/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/reviews/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/reviews/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/reviews/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/destination/detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/destination/detail.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -126,7 +124,7 @@
       <updated>1768384107503</updated>
       <workItem from="1768384108506" duration="159000" />
       <workItem from="1768384280332" duration="137000" />
-      <workItem from="1768384427276" duration="8633000" />
+      <workItem from="1768384427276" duration="12048000" />
     </task>
     <servers />
   </component>
