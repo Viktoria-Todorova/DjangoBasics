@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ page_title }}</title>
+</head>
+<body>
+    <main>
+        <article>
+            <h1>{{ destination.name }}</h1>
+            <p> Description: {{ destination.description }}</p>
+            <p>Country: {{ destination.country }}</p>
+            <p>Created at: {{ destination.created_at }}</p>
+            <a href ="{% url 'destination:redirect-home' %}">Back to destination</a>
+        </article>
+    </main>
+</body>
+</html>
