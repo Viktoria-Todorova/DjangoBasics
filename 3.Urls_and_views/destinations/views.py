@@ -27,3 +27,6 @@ def destination_detail(request:HttpRequest,slug:str) -> HttpResponse:
 
 def redirect_home(request:HttpRequest) -> HttpResponse:
     return redirect('destination:list') #temporary redirwct
+
+def page_not_found(request, exception):
+    return render(request, '404.html', status=404)

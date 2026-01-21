@@ -1,19 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>{{ page_title }}</title>
-</head>
-<body>
-    <main>
-        <article>
-            <h1>{{ destination.name }}</h1>
-            <p> Description: {{ destination.description }}</p>
-            <p>Country: {{ destination.country }}</p>
-            <p>Created at: {{ destination.created_at }}</p>
-            <a href = {% url 'review:list' %}>View reviews</a>
-            <a href ="{% url 'destination:redirect-home' %}">Back to destination</a>
-        </article>
-    </main>
-</body>
-</html>
+
+{% extends 'base.html' %}
+
+{% block title %}{{ destination.name }}{% endblock %}
+
+{% block content %}
+    <div class="card">
+        <div class="card-body">
+            <h1 class="card-title">{{ destination.name }}</h1>
+            <p class="card-text">Description: {{ destination.description }}</p>
+            <p class="card-text">Country: {{ destination.country }}</p>
+            <p class="card-text"><small class="text-muted">Created at: {{ destination.created_at }}</small></p>
+            <a href="{% url 'review:list' %}" class="btn btn-primary">View reviews</a>
+            <a href="{% url 'destination:list' %}" class="btn btn-secondary">Back to destinations</a>
+        </div>
+    </div>
+{% endblock %}

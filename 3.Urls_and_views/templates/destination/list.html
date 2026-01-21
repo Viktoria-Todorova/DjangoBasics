@@ -1,22 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>{{ page_title }}</title>
-</head>
-<body>
-    <main>
-        <ul>
-            {% for destination in destinations %}
-                <li>
-                    <a href="{% url 'destination:detail' destination.slug %}">
-                        {{ destination.name }} ({{ destination.country }})
-                    </a>
-                </li>
-            {% empty %}
-                <h1>No destinations.</h1>
-            {% endfor %}
-        </ul>
-    </main>
-</body>
-</html>
+
+{% extends 'base.html' %}
+
+{% block title %}Destinations{% endblock %}
+
+{% block content %}
+    <h1 class="mb-4">Destinations</h1>
+    <div class="list-group">
+        {% for destination in destinations %}
+            <a href="{% url 'destination:detail' destination.slug %}" class="list-group-item list-group-item-action">
+                {{ destination.name }} ({{ destination.country }})
+            </a>
+        {% empty %}
+            <p>No destinations.</p>
+        {% endfor %}
+    </div>
+{% endblock %}

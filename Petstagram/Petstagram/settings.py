@@ -25,20 +25,25 @@ SECRET_KEY = 'django-insecure-kvjez=78^pyj7d&_+enft2(y46mh=t-_^i=#b43v(aq9o=03xz
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"] #we never do it in production
 
 PROJECT_APPS =[
-
+    'accounts',
+    'common',
+    'pets',
+    'photos'
 ]
 # Application definition
 
 INSTALLED_APPS = [
+    'unfold',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
 ]+PROJECT_APPS
 
 MIDDLEWARE = [
@@ -122,3 +127,4 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 STATIC_URL = 'static/'
+STATICFILES_DIRS = [BASE_DIR / 'static']
