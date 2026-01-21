@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {{ page_title|default:"Recent Reviews" }}
+{% endblock %}
+
+{% block content %}
+    <h1 class="mb-4">{{ page_title|default:"Recent Customer Reviews" }}</h1>
+
+    {% if reviews %}
+        <div class="list-group">
+            {% for review in reviews %}
+                <a href="{% url 'reviews:detail' review.id %}" class="list-group-item list-group-item-action">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h5 class="mb-1">Review for "{{ review.book.title }}"</h5>
+                        <small>Rating: {{ review.rating|default:"N/A" }}/5</small>
+                    </div>
+                    <p class="mb-1">{{ review.text|truncatewords:30 }}</p>
+                    <small>By {{ review.user.username|default:"Anonymous" }} on {{ review.created_at|date:"F j, Y" }}</small>
+                </a>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="alert alert-info" role="alert">
+            There are no reviews yet. Be the first to write one!
+        </div>
+    {% endif %}
+{% endblock %}
