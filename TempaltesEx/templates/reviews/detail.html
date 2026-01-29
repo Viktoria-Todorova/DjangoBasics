@@ -20,7 +20,9 @@
             </blockquote>
         </div>
         <div class="card-footer">
-            <a href="{% url 'reviews:recent' %}" class="btn btn-secondary">Back to Recent Reviews</a>
+            <a href="{% url 'books:detail' review.book.slug %}" class="btn btn-secondary mt-4">Back to Recent Reviews</a>
+            <a href="{% url 'reviews:edit' review.pk %}" class="btn btn-warning mt-4">Edit</a>
+            <a href="{% url 'reviews:delete' review.pk %}" class="btn btn-danger mt-4">Delete</a>
         </div>
     </div>
 {% endblock %}

@@ -1,7 +1,8 @@
-from django.db.models import Avg
+from django.db.models import Avg, Q
 from django.http import HttpRequest, HttpResponse
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 
+from books.forms import BookFormBasic, BookEditForm, BookDeleteForm, BookSearchForm
 from books.models import Book
 
 
@@ -17,13 +18,35 @@ def lending_page(request: HttpRequest) -> HttpResponse:
     return render(request,'books/landing_page.html',context)
 
 def books_list(request: HttpRequest) -> HttpResponse:
-    list_books = Book.objects.annotate(
+    search_form = BookSearchForm(request.GET or None)
+    list_books = Book.objects.all()
+
+    if search_form.is_valid():
+        search_value = search_form.cleaned_data.get('query')
+        if search_value:
+            words = search_value.split()  # split into words
+            query = Q()
+            for word in words:
+                query |= Q(title__icontains=word) | Q(description__icontains=word)
+            list_books = list_books.filter(query)
+
+
+    # if 'query' in request.GET:
+    #     if search_form.is_valid():
+    #         search_value = search_form.cleaned_data['query']
+    #         list_books=list_books.filter(
+    #             Q(title__icontains=search_value) |
+    #             Q(description__icontains=search_value)
+    #         )
+
+    list_books = list_books.annotate(
         avg_rating=Avg('review__rating'),
     ).order_by('title')
 
     context = {
         'books': list_books,
-        'page_title': 'Details'
+        'page_title': 'Dashboard',
+        'search_form': search_form,
     }
 
     return render(request, 'books/list.html',context)
@@ -41,3 +64,56 @@ def book_details(request: HttpRequest, slug:str) -> HttpResponse:
     }
 
     return render(request,'books/detail.html',context)
+
+
+def book_create(request: HttpRequest) -> HttpResponse:
+    form = BookFormBasic(request.POST or None)
+    if request.method == 'POST' and form.is_valid():
+        # Book.objects.create(
+        #     title=form.cleaned_data['title'],
+        #     publishing_date=form.cleaned_data['publishing_date'],
+        #     isbn=form.cleaned_data['isbn'],
+        #     genre=form.cleaned_data['genre'],
+        #     price=form.cleaned_data['price'],
+        #     description=form.cleaned_data['description'],
+        #     image_url=form.cleaned_data['image_url'],
+        #     publisher=form.cleaned_data['publisher'],
+        #     #or!!!!!!!!!!!!!!!! **form.cleaned_data !!!!!!!!!!!!!!!!!
+        #
+        # )   ->> for forms
+        form.save() #--> to have save() method we have to have an instantion
+        return redirect('books:home')
+
+    context = {
+        'form': form,
+    }
+
+    return render(request,'books/create.html',context)
+
+
+def book_edit(request: HttpRequest,pk:int) -> HttpResponse:
+    book = Book.objects.get(pk=pk)
+    form= BookEditForm(request.POST or None,instance=book)  #we have instance only for forms
+    if request.method == 'POST' and form.is_valid():
+        form.save() #--> to have save() method we have to have an instantion
+        return redirect('books:home')
+
+    context = {
+        'form': form,
+    }
+
+    return render(request,'books/edit.html',context)
+
+
+def book_delete(request: HttpRequest,pk:int) -> HttpResponse:
+    book = Book.objects.get(pk=pk)
+    form= BookDeleteForm(request.POST or None,instance=book)  #we have instance only for forms
+    if request.method == 'POST' and form.is_valid():
+        book.delete()
+        return redirect('books:home')
+
+    context = {
+        'form': form,
+    }
+
+    return render(request,'books/delete.html',context)

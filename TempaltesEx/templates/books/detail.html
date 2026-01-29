@@ -17,10 +17,16 @@
         </div>
         <ul class="list-group list-group-flush">
             <li class="list-group-item"><strong>ISBN:</strong> {{ book.isbn }}</li>
+            <li class="list-group-item"><strong>Tags:</strong>{{ book.tags.all|join:', ' }} </li>
             <li class ='list-group-item'><strong>AVERAGE RATING:</strong> {{ book.avg_rating|floatformat:2|stars }}</li>
         </ul>
         <div class="card-body">
             <a href="{% url 'books:list' %}" class="btn btn-secondary">Back to List</a>
+        </div>
+        <div class="col-md-4">
+            <a href="{% url 'books:edit' book.pk %}" class="btn btn-warning">Edit</a>
+            <a href="{% url 'books:delete' book.pk %}" class="btn btn-danger">Delete</a>
+
         </div>
     </div>
 {% endblock %}
