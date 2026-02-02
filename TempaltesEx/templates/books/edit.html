@@ -1,19 +1,14 @@
 {% extends 'base.html'%}
+{% load crispy_forms_tags %}
+{% crispy example_form example_form.helper %}
 
 {% block content %}
     <div class="container">
         <h1 class="mt-4"> Edit Book </h1>
-         <form method="post" class="mt-4">
-            {% csrf_token %}
-             {% for field in form %}
-                 <div class="form-group mb-4">
-                    {{ field.label_tag }}
-                    {{ field }}
+        {% csrf_token %}
+        {% crispy form %}
 
-                 </div>
-             {% endfor %}
-        <button>Edit</button>
-        </form>
+
     </div>
 
 {% endblock %}

@@ -1,9 +1,17 @@
 {% extends 'base.html'%}
 
 {% block content %}
-    <form method="post">
-        {{ form }}
+    <form method="post" class="mt-4" enctype="multipart/form-data">
+        <h1 class="mt-4">Create a book</h1>
         {% csrf_token %}
+
+        {% for field in form %}
+            <div class = 'form-group mb-4'>
+                {{ field.errors }}
+                {{ field.label_tag }}
+                {{ field }}
+            </div>
+        {% endfor %}
     <button>Create</button>
     </form>
 {% endblock %}
