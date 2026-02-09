@@ -6,6 +6,14 @@ python manage.py makemigrations
 python manage.py migrate 
  python manage.py createsuperuser
 
+"Populate the Django database with seed data for my Petstagram app by creating and running a temporary script.
+pip install python-dotenv
+
+{% extends 'shared/base.html' %}
+
+{% block content %}
+{% endblock %}
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',

@@ -1,5 +1,6 @@
 from django.http import HttpRequest, HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+
 
 # Create your views here.
 
@@ -7,7 +8,7 @@ def photo_add(request: HttpRequest) -> HttpResponse:
     return render(request,'photos/photo-add-page.html')
 
 def photo_detail(request: HttpRequest,pk:int) -> HttpResponse:
-    return render(request,'photos/photo-details-page.html')
-
+    # return render(request,'photos/photo-details-page.html')
+    return redirect('common:home')
 def photo_edit(request: HttpRequest,pk:int) -> HttpResponse:
     return render(request,'photos/photo-edit-page.html')
