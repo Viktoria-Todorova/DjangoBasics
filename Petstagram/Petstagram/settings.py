@@ -33,6 +33,11 @@ ALLOWED_HOSTS = [
     'localhost',
     'lizabeth-grilla-kittie.ngrok-free'] #we never do it in production
 
+CSRF_TRUSTED_ORIGINS = [
+    'http://127.0.0.1',
+    'http://localhost',
+    'https://lizabeth-grilla-kittie.ngrok-free'
+]
 PROJECT_APPS =[
     'accounts',
     'common',
