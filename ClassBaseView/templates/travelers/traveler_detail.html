@@ -1,0 +1,139 @@
+{% extends 'home.html' %}
+{% load static %}
+
+{% block content %}
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 20px;
+    }
+    .traveler-detail-container {
+        background-color: #fff;
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        max-width: 700px;
+        margin: 20px auto;
+        border-left: 5px solid #007bff;
+    }
+    .traveler-detail-container h1 {
+        color: #333;
+        font-size: 2.2em;
+        margin-bottom: 25px;
+        border-bottom: 2px solid #eee;
+        padding-bottom: 10px;
+    }
+    .traveler-info {
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        gap: 15px;
+        margin-bottom: 20px;
+    }
+    .traveler-info div {
+        padding: 8px 0;
+    }
+    .traveler-info strong {
+        color: #555;
+        font-weight: bold;
+        display: block;
+        margin-bottom: 3px;
+    }
+    .traveler-info span {
+        color: #666;
+        font-size: 1em;
+    }
+    .traveler-bio {
+        background-color: #f9f9f9;
+        border-left: 4px solid #007bff;
+        padding: 15px;
+        margin-top: 25px;
+        border-radius: 4px;
+    }
+    .traveler-bio h2 {
+        color: #007bff;
+        font-size: 1.4em;
+        margin-top: 0;
+        margin-bottom: 10px;
+    }
+    .traveler-bio p {
+        color: #444;
+        line-height: 1.6;
+        margin-bottom: 0;
+    }
+    .action-links {
+        margin-top: 30px;
+        text-align: center;
+    }
+    .action-links a {
+        display: inline-block;
+        background-color: #007bff;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 5px;
+        text-decoration: none;
+        font-size: 1.1em;
+        transition: background-color 0.3s ease;
+        margin: 0 10px;
+    }
+    .action-links a:hover {
+        background-color: #0056b3;
+    }
+    .action-links .edit-link {
+        background-color: #28a745;
+    }
+    .action-links .edit-link:hover {
+        background-color: #218838;
+    }
+</style>
+
+<div class="traveler-detail-container">
+    <h1>Traveler Details: {{ traveler.name }}</h1>
+
+    <div class="traveler-info">
+        <div>
+            <strong>Name:</strong>
+            <span>{{ traveler.name }}</span>
+        </div>
+        <div>
+            <strong>Email:</strong>
+            <span>{{ traveler.email }}</span>
+        </div>
+        <div>
+            <strong>Age:</strong>
+            <span>{{ traveler.age }}</span>
+        </div>
+        <div>
+            <strong>Country:</strong>
+            <span>{{ traveler.get_country_display }}</span>
+        </div>
+        <div>
+            <strong>Reviews count:</strong>
+            <span>{{ reviews_count }}</span>
+        </div>
+        <div>
+            <strong>Registered At:</strong>
+            <span>{{ traveler.registered_at|date:"F j, Y, P" }}</span>
+        </div>
+         <div>
+            <strong>Destinations</strong>
+            <span>{{ traveler.destinations.all|join:', '|default:'No destinations' }}</span>
+        </div>
+    </div>
+
+    {% if traveler.bio %}
+        <div class="traveler-bio">
+            <h2>About {{ traveler.name }}</h2>
+            <p>{{ traveler.bio }}</p>
+        </div>
+    {% endif %}
+
+    <div class="action-links">
+        <a href="{% url 'travelers:traveler_list' %}">Back to Travelers</a>
+        <a href="{% url 'travelers:update' pk=traveler.pk %}" class="edit-link">Edit Traveler</a>
+        <a href="{% url 'travelers:delete' pk=traveler.pk %}" class="edit-link">Delete Traveler</a>
+
+    </div>
+</div>
+{% endblock %}

@@ -102,18 +102,19 @@
         </nav>
     </header>
 
-    <main class="hero-section">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-8">
-                    <div class="card p-5">
-                        <h1 class="display-4 mb-4" style="color: var(--purple-dark);">Explore the World with Us</h1>
-                        <p class="lead mb-4">Your journey begins here. Discover amazing destinations, share your experiences, and plan your next adventure.</p>
-                        <a href="#" class="btn btn-primary btn-lg">Start Planning</a>
-                    </div>
+    <main class="container py-4">
+        {% block content %}
+        <!-- Default content or instructions if no block content is provided by child templates -->
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="card p-5">
+                    <h1 class="display-4 mb-4" style="color: var(--purple-dark);">Welcome to Travel Planner</h1>
+                    <p class="lead mb-4">Discover amazing destinations, share your experiences, and plan your next adventure.</p>
+                    <a href="#" class="btn btn-primary btn-lg">Start Exploring</a>
                 </div>
             </div>
         </div>
+        {% endblock %}
     </main>
     {% for message in messages %}
         <li>{{ message }}</li>

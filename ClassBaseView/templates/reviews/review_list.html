@@ -1,0 +1,86 @@
+{% extends 'home.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-4">
+
+    <h2 class="mb-4">Verified Reviews</h2>
+
+    <!-- 🔽 Filter by Review Type -->
+    <form method="get" class="row g-2 mb-4">
+        <div class="col-md-10">
+            <select name="type" class="form-select">
+                <option value="">All Review Types</option>
+                {% for value, label in object_list.model.ReviewTypeChoices.choices %}
+                    <option value="{{ value }}" {% if request.GET.type == value %}selected{% endif %}>
+                        {{ label }}
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="col-md-2">
+            <button type="submit" class="btn btn-primary w-100">Filter</button>
+        </div>
+    </form>
+
+    <!-- 📋 Review List -->
+    {% for review in object_list %}
+        <div class="card mb-3">
+            <div class="card-body">
+                <h5 class="card-title">{{ review.title|default:"Review" }}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">
+                    {{ review.get_review_type_display }} • {{ review.created_at|date:"M d, Y" }}
+                </h6>
+                <p class="card-text">
+                    {{ review.content }}
+                </p>
+            </div>
+        </div>
+    {% empty %}
+        <div class="alert alert-warning">
+            No reviews found.
+        </div>
+    {% endfor %}
+    {{ page_message }}
+    <!-- 📄 Pagination -->
+    {% if is_paginated %}
+    <nav class="mt-4">
+        <ul class="pagination justify-content-center">
+
+            {% if page_obj.has_previous %}
+                <li class="page-item">
+                    <a class="page-link" href="?type={{ request.GET.type }}&page=1">First</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="?type={{ request.GET.type }}&page={{ page_obj.previous_page_number }}">Previous</a>
+                </li>
+            {% else %}
+                <li class="page-item disabled"><span class="page-link">First</span></li>
+                <li class="page-item disabled"><span class="page-link">Previous</span></li>
+            {% endif %}
+
+            <li class="page-item active">
+                <span class="page-link">
+                    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+                </span>
+            </li>
+
+            {% if page_obj.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="?type={{ request.GET.type }}&page={{ page_obj.next_page_number }}">Next</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="?type={{ request.GET.type }}&page={{ page_obj.paginator.num_pages }}">Last</a>
+                </li>
+            {% else %}
+                <li class="page-item disabled"><span class="page-link">Next</span></li>
+                <li class="page-item disabled"><span class="page-link">Last</span></li>
+            {% endif %}
+
+        </ul>
+    </nav>
+    {% endif %}
+
+</div>
+
+{% endblock %}

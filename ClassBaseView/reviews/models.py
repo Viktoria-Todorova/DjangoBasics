@@ -10,9 +10,9 @@ from travelers.models import Traveler
 
 class Review(models.Model):
     class ReviewTypeChoices(models.TextChoices):
-        TEXT = "TEXT", "Text"
-        VIDEO = "VIDEO", "Video"
-        AUDIO = "AUDIO", "Audio"
+        TEXT = "Text", "Text"
+        VIDEO = "Video", "Video"
+        AUDIO = "Audio", "Audio"
 
     body = models.TextField()
 
